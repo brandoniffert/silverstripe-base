@@ -1,0 +1,55 @@
+---
+Name: appextensions
+---
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_css:
+    - app/cms/cms.css
+  extra_requirements_javascript:
+    - app/cms/cms.js
+
+SilverStripe\Assets\File:
+  extensions:
+    - App\Extension\File
+  allowed_extensions:
+    - svg
+  app_categories:
+    image:
+      - svg
+    image/supported:
+      - svg
+
+SilverStripe\Assets\Image:
+  extensions:
+    - App\Extension\Image
+
+SilverStripe\Assets\Storage\DBFile:
+  extensions:
+    - App\Extension\Image
+
+SilverStripe\CMS\Controllers\CMSMain:
+  extensions:
+    - App\Extension\CMSMain
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - App\Extension\SiteTree
+
+SilverStripe\Forms\FieldList:
+  extensions:
+    - App\Extension\FieldList
+
+SilverStripe\Forms\FormField:
+  extensions:
+    - App\Extension\FormField
+
+# Eventually will work when silverstripe-login-forms is updated
+SilverStripe\Security\Security:
+  enable_dark_mode: false
+
+---
+After:
+  - '#ryanpotter-silverstripe-cms-theme'
+---
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - App\Extension\SiteConfig

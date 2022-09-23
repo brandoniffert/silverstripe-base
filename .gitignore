@@ -1,0 +1,14 @@
+/silverstripe-cache/
+/.env
+/vendor/
+/_resources/
+/public/_resources/
+/.graphql-generated/
+/public/_graphql/
+/public/assets
+/node_modules
+/themes/app/dist
+*.cache
+*.log
+report**.json
+.DS_Store

@@ -1,0 +1,43 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/utilities';
+
+:root {
+  --container-width: 1440px;
+  --container-padding: 20px;
+
+  @screen md {
+    --container-padding: 6vw;
+  }
+
+  @screen xl {
+    --container-padding: 75px;
+  }
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  max-width: calc(var(--container-width) + (2 * var(--container-padding)));
+}
+
+.skip-link {
+  @apply absolute overflow-hidden text-sm;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  clip: rect(0 0 0 0);
+
+  &:focus {
+    @apply h-auto w-auto bg-white px-3 py-2 text-black;
+    clip: auto;
+    z-index: 10000;
+  }
+}
+
+._preload * {
+  transition: none !important;
+}

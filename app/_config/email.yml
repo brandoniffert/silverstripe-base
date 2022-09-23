@@ -1,0 +1,20 @@
+---
+Name: project-emailconfig
+After:
+  - '#emailconfig'
+---
+SilverStripe\Core\Injector\Injector:
+  Swift_Transport:
+    class: Swift_SmtpTransport
+    properties:
+      Host: '`MAIL_HOST`'
+      Port: '`MAIL_PORT`'
+      Encryption: '`MAIL_ENCRYPTION`'
+    calls:
+      Username: [setUsername, ['`MAIL_USER`']]
+      Password: [setPassword, ['`MAIL_PASS`']]
+      AuthMode: [setAuthMode, ['`login`']]
+
+SilverStripe\Control\Email\Email:
+  admin_email:
+    'info@example.com': 'Site Name'

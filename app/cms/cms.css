@@ -1,0 +1,169 @@
+.cms .cms-sitename {
+  padding: 1.25rem 2rem !important;
+}
+
+.cms .cms-sitename .cms-sitename__title {
+  color: inherit !important;
+}
+
+.cms .cms-sitename .logo a img {
+  width: 90px;
+}
+
+/* Fix weird gridfield margin-top issue when gridfield is not the first item in a form */
+.tab .grid-field:not(:first-child) .toolbar--content,
+.displaylogicwrapper:not(:first-child) .grid-field .toolbar--content {
+  margin-top: 0;
+}
+
+table.grid-field__table + .description {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+/* Using Font Awesome icons with elemental, try to match original elemental styles for buttons/icons */
+.popover button.fas {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
+  white-space: normal;
+  overflow: hidden;
+  line-height: 1.4;
+  max-height: none;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.popover button.fas:before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: relative;
+  margin-right: 0.76925rem;
+  line-height: 19.9992px;
+  vertical-align: middle;
+  min-width: 27.3px;
+  display: inline-block;
+  text-align: center;
+  font-size: 19px;
+}
+
+.element-editor-header__icon-container .fas {
+  min-width: 28px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.cms .branded-menu__list-item > a .badge {
+  background: white;
+  color: #006477;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+/* https://github.com/praxisnetau/silverware-calendar */
+.flatpickr-current-month span.cur-month {
+  height: 23px;
+}
+
+.is-date-range input[type='text'] {
+  min-width: 200px;
+}
+
+/* Preview Link */
+#Form_ItemEditForm_PreviewLink {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Gridfield status */
+.gf-status {
+  display: inline-block;
+  padding: 2px 15px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.gf-status--gray {
+  background: #dedede;
+}
+
+.gf-status--gray-light {
+  background: #dedede;
+  opacity: 0.5;
+}
+
+.gf-status--red {
+  background: #f2dede;
+}
+
+.gf-status--yellow {
+  background: #fff3cd;
+}
+
+.gf-status--green {
+  background: #d4edda;
+}
+
+/* Site Icons */
+.site-icon-preview {
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+
+.site-icon-preview svg {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.site-icon-preview .site-icon mask {
+  fill: #fff;
+}
+
+/* Misc helpers */
+.field.composite-check-fix input.checkbox {
+  position: relative;
+  top: -1px;
+}
+
+.ui-accordion-content:not(.ui-accordion-content-active) {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.ui-accordion-content-active {
+  overflow: visible !important;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.ui-accordion-content div.alert {
+  width: calc(100% - 20px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.chosen-container-multi .ui-accordion-header-icon {
+  display: none;
+}
+
+.mce-widget.mce-notification.mce-notification-error {
+  display: none !important;
+}
+
+.field.date svg {
+  display: none;
+}
