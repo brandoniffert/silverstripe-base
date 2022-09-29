@@ -1,0 +1,7 @@
+---
+Name: appelements
+After: ['#versionedfiles']
+---
+DNADesign\Elemental\Models\BaseElement:
+  extensions:
+    - App\Extension\BaseElement
