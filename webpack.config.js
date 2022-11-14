@@ -46,6 +46,7 @@ const WebpackConfig = {
       '@sections': path.resolve(PATHS.SRC, 'scripts/sections'),
       '@styles': path.resolve(PATHS.SRC, 'styles'),
       '@images': path.resolve(PATHS.SRC, 'images'),
+      '@fonts': path.resolve(PATHS.SRC, 'fonts'),
     },
   },
 
