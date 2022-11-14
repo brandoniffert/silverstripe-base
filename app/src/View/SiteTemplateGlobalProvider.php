@@ -2,6 +2,7 @@
 
 namespace App\View;
 
+use App\Model\NavigationMenu;
 use App\Util\TextUtil;
 use App\Util\Util;
 use SilverStripe\ORM\ArrayList;
@@ -14,6 +15,9 @@ class SiteTemplateGlobalProvider implements TemplateGlobalProvider
     public static function get_template_global_variables()
     {
         return [
+            'NavigationMenu' => [
+                'method' => 'NavigationMenu'
+            ],
             'PhoneLink' => 'PhoneLink',
             'PhoneLinker' => [
                 'method' => 'PhoneLinker',
@@ -38,6 +42,19 @@ class SiteTemplateGlobalProvider implements TemplateGlobalProvider
             ],
             'Looper' => 'Looper'
         ];
+    }
+
+    public static function NavigationMenu($key)
+    {
+        if ($menu = NavigationMenu::get()->filter('Key', $key)->first()) {
+            $pages = $menu->Pages()->filter([
+                'ShowInMenus' => true
+            ])->sort('PageSort');
+
+            if ($pages->count()) {
+                return $pages;
+            }
+        }
     }
 
     public static function PhoneLink($number, $extension = '')
