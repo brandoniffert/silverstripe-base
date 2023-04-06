@@ -154,6 +154,17 @@ class Util
         return preg_replace('/ext\.?/', 'x', $clean);
     }
 
+    public static function formatPhone(string $phone, $ext = null)
+    {
+        $cleanNumber = self::cleanPhoneNumber($phone);
+
+        if (!is_null($ext) && $ext != '') {
+            return sprintf('tel:+1%sx%s', $cleanNumber, $ext);
+        }
+
+        return sprintf('tel:+1%s', $cleanNumber);
+    }
+
     /**
      * Generates a breadcrumbs element with a given array of parent pages
      * and a title for the current page.

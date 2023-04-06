@@ -5,8 +5,11 @@ namespace App\View;
 use App\Model\NavigationMenu;
 use App\Util\TextUtil;
 use App\Util\Util;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Core\Environment;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\TemplateGlobalProvider;
 
@@ -17,6 +20,9 @@ class SiteTemplateGlobalProvider implements TemplateGlobalProvider
         return [
             'NavigationMenu' => [
                 'method' => 'NavigationMenu'
+            ],
+            'NavigationMenuCacheKey' => [
+                'method' => 'NavigationMenuCacheKey'
             ],
             'PhoneLink' => 'PhoneLink',
             'PhoneLinker' => [
@@ -40,7 +46,8 @@ class SiteTemplateGlobalProvider implements TemplateGlobalProvider
                 'method' => 'TextEmphasizeFromEnd',
                 'casting' => 'HTMLFragment',
             ],
-            'Looper' => 'Looper'
+            'Looper' => 'Looper',
+            'DontCache' => 'DontCache'
         ];
     }
 
@@ -54,6 +61,28 @@ class SiteTemplateGlobalProvider implements TemplateGlobalProvider
             if ($pages->count()) {
                 return $pages;
             }
+        }
+    }
+
+    public static function NavigationMenuCacheKey($key)
+    {
+        if ($menu = NavigationMenu::get()->filter('Key', $key)->first()) {
+            $pages = $menu->Pages()->filter([
+                'ShowInMenus' => true
+            ])->sort('PageSort');
+
+            $siteConfig = SiteConfig::current_site_config();
+
+            $parts = [
+                "navigation-menu-{$key}",
+                SiteTree::get()->max('LastEdited'),
+                $menu->LastEdited,
+                $siteConfig->LastEdited,
+                join('-', $pages->column('ID')),
+                join('-', $pages->relation('Children')->column('ID'))
+            ];
+
+            return implode('-_-', $parts);
         }
     }
 
@@ -104,5 +133,10 @@ class SiteTemplateGlobalProvider implements TemplateGlobalProvider
     public static function Looper($count)
     {
         return ArrayList::create(array_fill(0, (int) $count, ArrayData::create()));
+    }
+
+    public static function DontCache()
+    {
+        return Environment::getEnv('SS_DISABLE_PARTIAL_CACHING');
     }
 }

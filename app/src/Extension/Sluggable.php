@@ -20,14 +20,20 @@ class Sluggable extends DataExtension
         if (!$this->owner->URLSegment || ($this->owner->URLSegment && $this->owner->isChanged('Title'))) {
             $urlSegmentFilter = URLSegmentFilter::create();
             $urlSegmentFilter->setAllowMultibyte(true);
-            $this->owner->URLSegment = $urlSegmentFilter->filter(trim($this->owner->Title));
 
+            $title = $this->owner->Title;
+
+            $cleaned = str_replace(' ', '-', $title);
+            $cleaned = str_replace('/', '-', $cleaned);
+            $cleaned = preg_replace('/[^A-Za-z0-9\-]/', '', $cleaned);
+
+            $urlSegment = $urlSegmentFilter->filter(trim($cleaned));
 
             $class = get_class($this->owner);
             $hasOne = $this->owner->hasOne();
 
             $filter = [
-                'URLSegment' => $this->owner->URLSegment,
+                'URLSegment' => $urlSegment
             ];
 
             if (isset($hasOne['Parent'])) {
@@ -46,10 +52,20 @@ class Sluggable extends DataExtension
                 }
             }
 
-            $count = 1;
+            $validUrlSegment = $urlSegment;
+
+            $count = 2;
             while ($class::get()->filter($filter)->exclude('ID', $this->owner->ID)->exists()) {
-                $this->owner->URLSegment = $this->owner->URLSegment . '-' . $count++;
-                $filter['URLSegment'] = $this->owner->URLSegment;
+                $validUrlSegment = $urlSegment . '-' . $count++;
+                $filter['URLSegment'] = $validUrlSegment;
+            }
+
+            $this->owner->URLSegment = $validUrlSegment;
+        }
+
+        if ($this->owner->hasField('OverrideURLSegment')) {
+            if ($this->owner->OverrideURLSegment) {
+                $this->owner->URLSegment = $this->owner->OverrideURLSegment;
             }
         }
     }

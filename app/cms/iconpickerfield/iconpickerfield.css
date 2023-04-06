@@ -1,0 +1,146 @@
+.iconpickerfield-wrapper {
+  position: relative;
+  visibility: hidden;
+}
+
+.iconpickerfield-ss-field {
+  display: none;
+}
+
+.iconpickerfield-holder {
+  position: absolute;
+  top: 100%;
+  border: 1px solid #dedede;
+  padding: 20px;
+  background: white;
+  min-width: 520px;
+  opacity: 0;
+  pointer-events: none;
+  left: 0;
+  z-index: 999;
+}
+
+.iconpickerfield-wrapper.is-active .iconpickerfield-holder {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.iconpickerfield-search {
+  margin-bottom: 12px;
+}
+
+.iconpickerfield-search input {
+  width: 100%;
+  display: block;
+  padding: 4px 8px;
+}
+
+.iconpickerfield-search-clear {
+  text-decoration: underline;
+  margin-top: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  display: none;
+}
+
+.iconpickerfield-icon-list {
+  list-style: none;
+  height: 480px;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(12, 36px);
+  grid-gap: 4px;
+}
+
+.iconpickerfield-icon-list:hover button {
+  opacity: 0.6;
+}
+
+.iconpickerfield-icon-list button {
+  border: 1px solid #e8e8e8;
+  padding: 4px;
+  background: none;
+  width: 36px;
+  height: 36px;
+  color: black;
+}
+
+.iconpickerfield-icon-list button:hover {
+  border-color: black;
+  opacity: 1;
+}
+
+.iconpickerfield-icon-list button svg {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.iconpickerfield-icon-list button svg mask {
+  fill: #fff;
+}
+
+.iconpickerfield-field {
+  display: flex;
+  align-items: center;
+}
+
+.iconpickerfield-preview {
+  flex-shrink: 0;
+}
+
+.iconpickerfield-selected {
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border: 1px solid #ced5e1;
+  text-align: center;
+}
+
+.iconpickerfield-selected svg {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.iconpickerfield-selected svg mask {
+  fill: #fff;
+}
+
+.iconpickerfield-field {
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.iconpickerfield-controls {
+  display: flex;
+  align-items: center;
+}
+
+.iconpickerfield-controls button {
+  padding: 0;
+  background: none;
+  border: none;
+  margin-left: 12px;
+  display: none;
+}
+
+.iconpickerfield-controls button:hover {
+  text-decoration: underline;
+}
+
+button.iconpickerfield-choose {
+  border: 1px solid #ced5e1;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-left: 0;
+}
+
+.iconpickerfield-remove {
+  color: #da273b;
+}

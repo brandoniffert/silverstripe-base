@@ -3,21 +3,23 @@
   "type": "silverstripe-recipe",
   "description": "A base SilverStripe setup",
   "require": {
-    "php": "^7.4 || ^8.0",
+    "php": "^7.4 || ^8.0 || ^8.1",
     "silverstripe/recipe-plugin": "^1.2",
-    "silverstripe/recipe-cms": "~4.11.0@stable",
-    "silverstripe/login-forms": "~4.7.0@stable",
+    "silverstripe/recipe-cms": "~4.12.0@stable",
+    "silverstripe/login-forms": "~4.8.0@stable",
     "cakephp/chronos": "^2.3",
-    "dnadesign/silverstripe-elemental": "^4.9",
+    "dnadesign/silverstripe-elemental": "^4.10",
     "firebrandhq/silverstripe-phonelink": "^2.1",
     "jonom/focuspoint": "^4.0",
     "kinglozzer/metatitle": "^2.0",
     "ryanpotter/silverstripe-cms-theme": "^3.4",
     "silverstripe/redirectedurls": "^2.1",
     "silverware/calendar": "^1.1",
-    "symbiote/silverstripe-gridfieldextensions": "^3.4",
+    "symbiote/silverstripe-gridfieldextensions": "^3.5",
     "unclecheese/display-logic": "^2.0",
-    "wilr/silverstripe-googlesitemaps": "^2.2"
+    "wilr/silverstripe-googlesitemaps": "^2.2",
+    "axllent/silverstripe-trailing-slash": "^2.2",
+    "wedevelopnl/silverstripe-webp-images": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5"

@@ -77,6 +77,18 @@ table.grid-field__table + .description {
   min-width: 200px;
 }
 
+/* Fix tabsets in ModelAdmins */
+.model-admin-tabset .ui-tabs-nav {
+  float: none;
+  padding: 0;
+  border-bottom: 1px solid #c1cad9;
+  margin-top: -1.5385rem;
+}
+
+.model-admin-tabset .ui-tabs-nav + .tab-content {
+  margin-top: 32px;
+}
+
 /* Preview Link */
 #Form_ItemEditForm_PreviewLink {
   margin: 0;

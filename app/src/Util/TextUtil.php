@@ -12,7 +12,7 @@ class TextUtil
         $startTag = "<{$tagName}>";
         $endTag = "</{$tagName}>";
 
-        $formatted = str_replace('[', $startTag, trim($text));
+        $formatted = str_replace('[', $startTag, trim($text ?? ''));
         $formatted = str_replace(']', $endTag, trim($formatted));
         $formatted = str_replace('|', '<br>', trim($formatted));
 
@@ -24,7 +24,7 @@ class TextUtil
      */
     public static function deemphasize(?string $text)
     {
-        $formatted = str_replace('[', '', trim($text));
+        $formatted = str_replace('[', '', trim($text ?? ''));
         $formatted = str_replace(']', '', trim($formatted));
         $formatted = str_replace('|', '', trim($formatted));
 
@@ -36,7 +36,7 @@ class TextUtil
      */
     public static function emphasizeFromStart(string $text, int $numWords = 1)
     {
-        $text = trim($text);
+        $text = trim($text ?? '');
         $output = '';
         $words = preg_split('/\s+/', $text);
         $chunks = array_chunk($words, $numWords);
@@ -55,7 +55,7 @@ class TextUtil
      */
     public static function emphasizeFromEnd(string $text, int $numWords = 1)
     {
-        $text = trim($text);
+        $text = trim($text ?? '');
         $output = '';
         $words = preg_split('/\s+/', $text);
         $chunks = array_chunk($words, $numWords);
@@ -74,7 +74,7 @@ class TextUtil
      */
     public static function truncate(string $text, int $maxChars = 60, string $append = '…')
     {
-        $text = trim($text);
+        $text = trim($text ?? '');
 
         if (strlen($text) > $maxChars) {
             $text = wordwrap($text, $maxChars);

@@ -2,10 +2,14 @@
 
 namespace App\Extension;
 
+use App\Model\NavigationMenu;
+use App\Model\SiteIcon;
+use App\Util\Util;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayList;
@@ -57,6 +61,27 @@ class SiteConfig extends DataExtension
             TextField::create('TwitterURL', 'Twitter URL'),
             UploadField::create('SocialSharePhoto')
                 ->setAllowedFileCategories('image')
+        ]);
+
+        // Icons tab
+        $fields->addFieldsToTab('Root.Icons', [
+            Util::cmsInfoMessage('Manages the icon library available throughout the site'),
+            GridField::create(
+                'Icons',
+                'Icons',
+                SiteIcon::get()->filter('IsCustom', true),
+                Util::getRecordEditorConfig(false)
+            )
+        ]);
+
+        // Menus tab
+        $fields->addFieldsToTab('Root.Menus', [
+            GridField::create(
+                'Menus',
+                'Menus',
+                NavigationMenu::get(),
+                Util::getRecordEditorConfig(false)
+            )
         ]);
 
         $fields->addFieldsToTab(

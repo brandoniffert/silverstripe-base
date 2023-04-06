@@ -3,8 +3,8 @@
 namespace App\Util;
 
 use SilverStripe\Control\Director;
-use SilverStripe\Core\Manifest\ManifestFileFinder;
 use SilverStripe\Core\Path;
+use SilverStripe\View\Requirements;
 
 class AssetUtil
 {
@@ -92,6 +92,76 @@ class AssetUtil
     }
 
     /**
+     * Requires a js and css file from the webpack assests-manifest.json file
+     *
+     * @param mixed $name
+     */
+    public static function requireManifestAssets($name)
+    {
+        Requirements::set_force_js_to_bottom(true);
+
+        $manifest = self::getManifest();
+
+        if (array_key_exists($name, $manifest['entrypoints'])) {
+            $assets = $manifest['entrypoints'][$name]['assets'];
+
+            if (array_key_exists('css', $assets)) {
+                foreach ($assets['css'] as $resource) {
+                    Requirements::themedCSS(self::getResourcePath($resource));
+                }
+            }
+
+            if (array_key_exists('js', $assets)) {
+                foreach ($assets['js'] as $resource) {
+                    Requirements::themedJavascript(self::getResourcePath($resource));
+                }
+            }
+        }
+    }
+
+    /**
+     * Requires a css file from the webpack assests-manifest.json file
+     *
+     * @param mixed $name
+     */
+    public static function requireManifestCSS($name)
+    {
+        $manifest = self::getManifest();
+
+        if (array_key_exists($name, $manifest['entrypoints'])) {
+            $assets = $manifest['entrypoints'][$name]['assets'];
+
+            if (array_key_exists('css', $assets)) {
+                foreach ($assets['css'] as $resource) {
+                    Requirements::themedCSS(self::getResourcePath($resource));
+                }
+            }
+        }
+    }
+
+    /**
+     * Requires a js file from the webpack assests-manifest.json file
+     *
+     * @param mixed $name
+     */
+    public static function requireManifestJS($name)
+    {
+        Requirements::set_force_js_to_bottom(true);
+
+        $manifest = self::getManifest();
+
+        if (array_key_exists($name, $manifest['entrypoints'])) {
+            $assets = $manifest['entrypoints'][$name]['assets'];
+
+            if (array_key_exists('js', $assets)) {
+                foreach ($assets['js'] as $resource) {
+                    Requirements::themedJavascript(self::getResourcePath($resource));
+                }
+            }
+        }
+    }
+
+    /**
      * Returns a path to a file relative to the theme's resources folder (usually the dist or output directory).
      *
      * @param mixed $path
@@ -100,7 +170,7 @@ class AssetUtil
     {
         return Path::join(
             '/',
-            ManifestFileFinder::RESOURCES_DIR,
+            RESOURCES_DIR,
             self::$themeDir,
             'dist',
             $path

@@ -42,7 +42,10 @@ SilverStripe\Forms\FormField:
   extensions:
     - App\Extension\FormField
 
-# Eventually will work when silverstripe-login-forms is updated
+SilverStripe\ORM\FieldType\DBString:
+  extensions:
+    - App\Extension\DBString
+
 SilverStripe\Security\Security:
   enable_dark_mode: false
 

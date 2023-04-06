@@ -11,7 +11,7 @@ class FormField extends Extension
      */
     public function showEmphasisHelper()
     {
-        $currentTitle = trim($this->owner->RightTitle());
+        $currentTitle = $this->owner->RightTitle() ? trim($this->owner->RightTitle()) : '';
         $helper = 'Surround text in [ and ] brackets for emphasis styling.';
 
         // If there is already a RightTitle, append our message to the end
@@ -33,7 +33,7 @@ class FormField extends Extension
      */
     public function showSuggestedSizeHelper(string $sizeStr)
     {
-        $currentTitle = trim($this->owner->RightTitle());
+        $currentTitle = $this->owner->RightTitle() ? trim($this->owner->RightTitle()) : '';
         $helper = sprintf('Suggested size: %s.', $sizeStr);
 
         // If there is already a RightTitle, append our message to the end
@@ -55,7 +55,7 @@ class FormField extends Extension
      */
     public function showYouTubeHelper(bool $hidePlaceholder = false)
     {
-        $currentTitle = trim($this->owner->RightTitle());
+        $currentTitle = $this->owner->RightTitle() ? trim($this->owner->RightTitle()) : '';
         $helper = 'Enter a YouTube video URL (ex: https://www.youtube.com/watch?v=xxxxx).';
 
         // If there is already a RightTitle, append our message to the end
