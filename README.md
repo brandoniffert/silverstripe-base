@@ -7,7 +7,7 @@ Base setup for a Silverstripe website
 [Download zip](https://github.com/brandoniffert/silverstripe-base/archive/refs/heads/main.zip) or
 
 ```bash
-wget -q https://github.com/brandoniffert/silverstripe-base/archive/refs/heads/main.tar.gz -O - | tar -xz
+curl -sL https://github.com/brandoniffert/silverstripe-base/archive/refs/heads/main.tar.gz | tar xz
 ```
 
 ## Setup
