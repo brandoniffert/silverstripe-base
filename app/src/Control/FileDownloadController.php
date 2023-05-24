@@ -36,7 +36,7 @@ class FileDownloadController extends Controller
             'FileHash' => $fileHash
         ])->first()) {
             if ($file->canView()) {
-                return HTTPRequest::send_file($file->getString(), $file->getFilename(), $file->getMimeType());
+                return HTTPRequest::send_file($file->getString(), $file->Name, $file->getMimeType());
             }
 
             die('Forbidden');

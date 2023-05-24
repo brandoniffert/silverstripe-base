@@ -11,7 +11,7 @@
     $Image.SrcSet($Width, $Height)
     sizes="<% if Sizes %>$Sizes<% else %>(max-width: 1280px) 100vw, 1340px<% end_if %>"
     style="object-position: $Image.FocusPoint.PercentageX% $Image.FocusPoint.PercentageY%; <% if Styles %>$Styles<% end_if %>"
-    alt="<% if Title %>$Title<% else %>$Image.Title<% end_if %>"
+    alt="<% if Alt %>$Alt<% else %>$Image.Title<% end_if %>"
     <% if Classes %>class="$Classes"<% end_if %>
   />
 <% end_if %>

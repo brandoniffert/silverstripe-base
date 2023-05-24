@@ -11,4 +11,11 @@ class File extends DataExtension
     {
         return FileDownloadController::createLinkFromFile($this->owner);
     }
+
+    public function getNonWebpAbsoluteURL()
+    {
+        $url = $this->owner->AbsoluteURL;
+
+        return str_replace('.webp', '', $url);
+    }
 }
