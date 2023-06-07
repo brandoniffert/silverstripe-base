@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Security\CMSPermissionProvider;
 use SilverStripe\AssetAdmin\Forms\UploadField;
-use SilverStripe\Assets\Image;
+use SilverStripe\Assets\File;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Path;
 use SilverStripe\Forms\FieldList;
@@ -37,7 +37,7 @@ class SiteIcon extends DataObject
     ];
 
     private static $has_one = [
-        'Icon' => Image::class
+        'Icon' => File::class
     ];
 
     private static $owns = [
