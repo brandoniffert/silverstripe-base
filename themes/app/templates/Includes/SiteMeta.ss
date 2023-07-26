@@ -10,6 +10,12 @@
 
 $MetaTags(false)
 
+<% if CanonicalLink %>
+  <link rel="canonical" href="$CanonicalLink" />
+<% else %>
+  <link rel="canonical" href="$AbsoluteLink" />
+<% end_if %>
+
 <% if ObjectMetaTags %>
   <title>$ObjectMetaTags.MetaTitle | $SiteConfig.Title</title>
   <meta property="og:title" content="$ObjectMetaTags.MetaTitle | $SiteConfig.Title" />

@@ -4,12 +4,9 @@ namespace App\Extension;
 
 use App\Page\HomePage;
 use SilverStripe\CMS\Model\RedirectorPage;
-use SilverStripe\CMS\Model\VirtualPage;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\View\HTML;
 
 class SiteTree extends DataExtension
 {
@@ -50,39 +47,10 @@ class SiteTree extends DataExtension
         );
     }
 
-    public function MetaTags(&$tags)
+    public function MetaComponents(&$tags)
     {
-        $siteConfig = SiteConfig::current_site_config();
-
-        if ('' != $siteConfig->CanonicalDomain && VirtualPage::class != $this->owner->ClassName) {
-            $canonicalBase = trim($siteConfig->CanonicalDomain, '/');
-
-            if (method_exists($this->owner, 'CanonicalLink')) {
-                $link = $this->owner->CanonicalLink();
-            } else {
-                $link = $this->owner->Link();
-            }
-
-            $canonLink = $canonicalBase . $link;
-
-            $atts = [
-                'rel' => 'canonical',
-                'href' => $canonLink,
-            ];
-
-            $canonTag = HTML::createTag('link', $atts);
-
-            $tagsArray = explode(PHP_EOL, $tags);
-            $tagPattern = 'rel="canonical"';
-            $tagSearch = function ($val) use ($tagPattern) {
-                return false !== stripos($val, $tagPattern) ? true : false;
-            };
-
-            $currentTags = array_filter($tagsArray, $tagSearch);
-            $cleanedTags = array_diff($tagsArray, $currentTags);
-            $cleanedTags[] = $canonTag;
-
-            $tags = implode(PHP_EOL, $cleanedTags);
+        if (array_key_exists('description', $tags)) {
+            unset($tags['description']);
         }
     }
 
