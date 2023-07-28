@@ -2,18 +2,25 @@
 
 namespace App\Extension;
 
+use App\Model\MobileBarAction;
 use App\Model\NavigationMenu;
 use App\Model\SiteIcon;
+use App\Model\ThirdPartyScript;
 use App\Util\Util;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Control\Director;
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\EmailField;
+use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\Security\Security;
 use SilverStripe\View\ArrayData;
 
 class SiteConfig extends DataExtension
@@ -28,11 +35,19 @@ class SiteConfig extends DataExtension
         'ContactPhoneNumber' => 'Varchar',
         'ContactEmail' => 'Varchar',
         'FacebookURL' => 'Varchar',
-        'TwitterURL' => 'Varchar'
+        'TwitterURL' => 'Varchar',
+        'MobileBarEnabled' => 'Boolean',
+        'MobileBarBgColor' => 'Varchar',
+        'MobileBarFgColor' => 'Varchar'
     ];
 
     private static $has_one = [
         'SocialSharePhoto' => Image::class
+    ];
+
+    private static $has_many = [
+        'MobileBarActions' => MobileBarAction::class . '.Owner',
+        'ThirdPartyScripts' => ThirdPartyScript::class . '.Owner'
     ];
 
     private static $owns = [
@@ -42,10 +57,22 @@ class SiteConfig extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('Tagline');
+        $fields->removeByName('CMSBrandingTab');
 
         $fields->addFieldsToTab('Root.Main', [
             TextField::create('GTMID', 'Google Tag Manager ID'),
         ]);
+
+        if (Security::getCurrentUser() && Security::getCurrentUser()->ID == 1) {
+            $fields->addFieldsToTab('Root.Main', [
+                GridField::create(
+                    'ThirdPartyScripts',
+                    'Third Party Scripts',
+                    $this->owner->ThirdPartyScripts(),
+                    Util::getRecordEditorConfig(false)
+                )
+            ]);
+        }
 
         $fields->addFieldsToTab('Root.Contact Info', [
             TextField::create('ContactAddress', 'Street Address'),
@@ -81,6 +108,29 @@ class SiteConfig extends DataExtension
                 'Menus',
                 NavigationMenu::get(),
                 Util::getRecordEditorConfig(false)
+            )
+        ]);
+
+        $fields->addFieldsToTab('Root.Mobile Bar', [
+            FieldGroup::create(
+                'Enabled',
+                CheckboxField::create('MobileBarEnabled', 'Enable mobile bar')
+            ),
+            ToggleCompositeField::create(
+                'MobileBarStyles',
+                'Style',
+                [
+                    TextField::create('MobileBarBgColor', 'Background color')
+                        ->setDescription('As CSS hex value'),
+                    TextField::create('MobileBarFgColor', 'Foreground color')
+                        ->setDescription('As CSS hex value')
+                ]
+            ),
+            GridField::create(
+                'MobileBarActions',
+                'Items',
+                $this->owner->MobileBarActions(),
+                Util::getRecordEditorConfig()
             )
         ]);
 
@@ -133,5 +183,55 @@ class SiteConfig extends DataExtension
         ];
 
         return $data;
+    }
+
+    public function getMobileBar()
+    {
+        return ArrayData::create([
+            'Enabled' => $this->owner->MobileBarEnabled,
+            'Items' => $this->owner->MobileBarActions(),
+            'BgColor' => $this->owner->MobileBarBgColor ?? '#000000',
+            'FgColor' => $this->owner->MobileBarFgColor ?? '#ffffff'
+        ]);
+    }
+
+    public function getHeadThirdPartyScripts()
+    {
+        $enabledScripts = [];
+
+        $scripts = $this->owner->ThirdPartyScripts()->filter([
+            'Enabled' => true,
+            'Placement' => 'Head'
+        ]);
+
+        foreach ($scripts as $script) {
+            if ($script->OnlyLive && !Director::isLive()) {
+                continue;
+            }
+
+            $enabledScripts[] = $script;
+        }
+
+        return ArrayList::create($enabledScripts);
+    }
+
+    public function getBodyThirdPartyScripts()
+    {
+        $enabledScripts = [];
+
+        $scripts = $this->owner->ThirdPartyScripts()->filter([
+            'Enabled' => true,
+            'Placement' => 'Body'
+        ]);
+
+        foreach ($scripts as $script) {
+            if ($script->OnlyLive && !Director::isLive()) {
+                continue;
+            }
+
+            $enabledScripts[] = $script;
+        }
+
+        return ArrayList::create($enabledScripts);
     }
 }

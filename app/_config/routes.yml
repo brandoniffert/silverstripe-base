@@ -7,3 +7,4 @@ After:
 SilverStripe\Control\Director:
   rules:
     '_downloadfile//$Action': App\Control\FileDownloadController
+    '_formsubmit//$Action': App\Form\FormController

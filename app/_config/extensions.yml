@@ -42,6 +42,10 @@ SilverStripe\Forms\FormField:
   extensions:
     - App\Extension\FormField
 
+SilverStripe\Forms\Form:
+  extensions:
+    - App\Extension\Form
+
 SilverStripe\ORM\FieldType\DBString:
   extensions:
     - App\Extension\DBString
