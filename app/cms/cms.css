@@ -23,7 +23,11 @@ table.grid-field__table + .description {
 
 /* Using Font Awesome icons with elemental, try to match original elemental styles for buttons/icons */
 .popover button.fas {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family:
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-weight: normal;
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
@@ -177,5 +181,10 @@ table.grid-field__table + .description {
 }
 
 .field.date svg {
+  display: none;
+}
+
+/* Hide disabled page types from Add Page */
+#Form_AddForm_PageType_Holder .radio.form-check.disabled {
   display: none;
 }
