@@ -50,6 +50,12 @@ SilverStripe\ORM\FieldType\DBString:
   extensions:
     - App\Extension\DBString
 
+SilverStripe\MimeValidator\MimeUploadValidator:
+  MimeTypes:
+    svg:
+      - image/svg+xml
+      - image/svg
+
 SilverStripe\Security\Security:
   enable_dark_mode: false
 

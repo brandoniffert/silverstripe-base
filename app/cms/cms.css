@@ -81,6 +81,11 @@ table.grid-field__table + .description {
   min-width: 200px;
 }
 
+/* Make these empty gridfields have better spacing */
+.ss-gridfield {
+  min-height: 275px;
+}
+
 /* Fix tabsets in ModelAdmins */
 .model-admin-tabset .ui-tabs-nav {
   float: none;
