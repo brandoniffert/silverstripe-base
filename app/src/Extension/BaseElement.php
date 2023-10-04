@@ -2,6 +2,7 @@
 
 namespace App\Extension;
 
+use App\Util\TextUtil;
 use App\Util\Util;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldGroup;
@@ -13,12 +14,25 @@ class BaseElement extends DataExtension
 {
     private static $db = [
         'AnchorOverride' => 'Varchar',
-        'IsHidden' => 'Boolean'
+        'IsHidden' => 'Boolean',
+        'DisableAnimations' => 'Boolean'
     ];
 
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('IsHidden');
+        $fields->removeByName('DisableAnimations');
+
+        $hasAnimations = $this->owner->config()->get('has_animations');
+
+        if ($hasAnimations) {
+            $fields->addFieldsToTab('Root.Settings', [
+                FieldGroup::create(
+                    'Animations',
+                    CheckboxField::create('DisableAnimations', 'Disable any animations in this element')
+                )
+            ]);
+        }
 
         $fields->addFieldsToTab('Root.Settings', [
             FieldGroup::create(
@@ -75,6 +89,19 @@ class BaseElement extends DataExtension
     public function getHideIf()
     {
         return $this->owner->IsHidden;
+    }
+
+    public function getSearchDisplayName()
+    {
+        $type = $this->owner->i18n_singular_name();
+
+        $title = TextUtil::deemphasize($this->owner->Title);
+
+        if ($type) {
+            return "({$type}) - {$title}";
+        }
+
+        return $title;
     }
 
     public function getRecordEditorConfig($sortable = true)

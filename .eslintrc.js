@@ -1,29 +1,20 @@
 module.exports = {
   root: true,
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
+  extends: ["eslint:recommended", "prettier"],
   env: {
     browser: true,
     es6: true,
     node: true,
   },
-  ignorePatterns: ['node_modules'],
+  ignorePatterns: ["node_modules"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    sourceType: 'module',
+    sourceType: "module",
     ecmaVersion: 2020,
   },
   rules: {
-    'no-console': 1,
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
+    "no-console": 1,
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
-  plugins: ['react', 'react-hooks'],
-}
+};

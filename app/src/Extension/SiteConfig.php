@@ -171,6 +171,20 @@ class SiteConfig extends DataExtension
         return $list;
     }
 
+    public function getDirectionsLink()
+    {
+        $address = [
+            $this->owner->ContactAddress,
+            $this->owner->ContactCity,
+            $this->owner->ContactState,
+            $this->owner->ContactZip
+        ];
+
+        $link = sprintf('https://www.google.com/maps/place/%s', join('+', $address));
+
+        return str_replace(' ', '+', $link);
+    }
+
     public function getSiteStructuredData()
     {
         $data = [

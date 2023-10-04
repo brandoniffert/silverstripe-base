@@ -42,7 +42,7 @@ table.grid-field__table + .description {
 }
 
 .popover button.fas:before {
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   position: relative;
   margin-right: 0.76925rem;
@@ -75,10 +75,6 @@ table.grid-field__table + .description {
 /* https://github.com/praxisnetau/silverware-calendar */
 .flatpickr-current-month span.cur-month {
   height: 23px;
-}
-
-.is-date-range input[type='text'] {
-  min-width: 200px;
 }
 
 /* Make these empty gridfields have better spacing */
@@ -151,6 +147,11 @@ table.grid-field__table + .description {
 
 .site-icon-preview .site-icon mask {
   fill: #fff;
+}
+
+.site-icon-preview .site-icon * {
+  opacity: 1 !important;
+  fill-opacity: 1 !important;
 }
 
 /* Misc helpers */

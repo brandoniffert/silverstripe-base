@@ -58,4 +58,30 @@ class SiteTree extends DataExtension
     {
         return [];
     }
+
+    public function getPageHeaderTitle()
+    {
+        $headerTitle = $this->owner->getField('HeaderTitle');
+
+        if ($headerTitle) {
+            return $headerTitle;
+        }
+
+        return $this->owner->Title;
+    }
+
+    public function getPageHeaderAdditional()
+    {
+        return false;
+    }
+
+    public function getMenuChildren()
+    {
+        return $this->owner->Children();
+    }
+
+    public function getBreadcrumbTitle()
+    {
+        return $this->owner->MenuTitle;
+    }
 }

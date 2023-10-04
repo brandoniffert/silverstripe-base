@@ -3,7 +3,6 @@
 namespace App\View;
 
 use App\Util\AssetUtil;
-use SilverStripe\Core\Path;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\TemplateGlobalProvider;
 
@@ -26,6 +25,9 @@ class AssetTemplateGlobalProvider implements TemplateGlobalProvider
             'AssetIconInline' => [
                 'method' => 'getAssetIconInline',
                 'casting' => 'HTMLFragment',
+            ],
+            'ManifestAssets' => [
+                'method' => 'ManifestAssets'
             ]
         ];
     }
@@ -87,7 +89,8 @@ class AssetTemplateGlobalProvider implements TemplateGlobalProvider
      * The viewBox attribute is extracted from the spritemap symbol
      * and applied to the parent <svg> so it's easier to work with in CSS
      *
-     * @param mixed $name
+     * @param string $name
+     * @param mixed $classes
      */
     public static function getAssetIcon($name, $classes = false)
     {
@@ -97,10 +100,20 @@ class AssetTemplateGlobalProvider implements TemplateGlobalProvider
     /**
      * Returns an SVG icon based on file.
      *
-     * @param mixed $name
+     * @param string $name
      */
     public static function getAssetIconInline($name)
     {
         return AssetUtil::getAssetInline($name);
+    }
+
+    /**
+     * Requires named assets (css/js)
+     *
+     * @param string $name
+     */
+    public static function ManifestAssets($name)
+    {
+        AssetUtil::requireManifestAssets($name);
     }
 }

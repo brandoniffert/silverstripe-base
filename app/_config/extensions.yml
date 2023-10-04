@@ -32,7 +32,12 @@ SilverStripe\CMS\Controllers\CMSMain:
 
 SilverStripe\CMS\Model\SiteTree:
   extensions:
+    - App\Extension\CallToAction
     - App\Extension\SiteTree
+
+SilverStripe\Control\Controller:
+  extensions:
+    - App\Extension\Controller
 
 SilverStripe\Forms\FieldList:
   extensions:
@@ -61,7 +66,7 @@ SilverStripe\Security\Security:
 
 ---
 After:
-  - '#ryanpotter-silverstripe-cms-theme'
+  - "#ryanpotter-silverstripe-cms-theme"
 ---
 SilverStripe\SiteConfig\SiteConfig:
   extensions:

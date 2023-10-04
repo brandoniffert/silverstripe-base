@@ -7,6 +7,8 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Path;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TabSet;
@@ -72,7 +74,11 @@ class SiteIcon extends DataObject
             UploadField::create('Icon')
                 ->setAllowedExtensions(['svg'])
                 ->setFolderName('Icons')
-                ->setDescription('Must be an svg file')
+                ->setDescription('Must be an svg file'),
+            FieldGroup::create(
+                'Preserve Colors',
+                CheckboxField::create('PreserveColors', 'Preserve any colors in the SVG instead of overwritting')
+            )
         ]);
 
         $this->extend('updateCMSFields', $fields);
@@ -104,6 +110,7 @@ class SiteIcon extends DataObject
         $slug = URLSegmentFilter::create()->filter($this->Title);
 
         $svg = str_replace('class="site-icon"', "class=\"site-icon {$classes} site-icon-{$slug}\"", $svg);
+        $svg = str_replace('class="site-icon site-icon-preserve-colors"', "class=\"site-icon site-icon-preserve-colors {$classes} site-icon-{$slug}\"", $svg);
 
         return DBField::create_field('HTMLText', $svg);
     }
@@ -142,6 +149,12 @@ class SiteIcon extends DataObject
 
     public static function optimizeSvg($path, $preserveColors = false)
     {
+        $classes = ['site-icon'];
+
+        if ($preserveColors) {
+            $classes[] = 'site-icon-preserve-colors';
+        }
+
         $config = [
             'plugins' => [
                 'removeXMLProcInst',
@@ -149,7 +162,7 @@ class SiteIcon extends DataObject
                 [
                     'name' => 'addClassesToSVGElement',
                     'params' => [
-                        'className' => 'site-icon'
+                        'className' => join(' ', $classes)
                     ]
                 ]
             ]

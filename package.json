@@ -8,8 +8,8 @@
     "start": "NODE_ENV=development webpack serve",
     "start:sourcemaps": "NODE_ENV=development SOURCEMAPS=1 webpack serve",
     "build": "NODE_ENV=production webpack",
-    "lint": "eslint themes/app/src/scripts",
-    "lint:fix": "eslint --fix themes/app/src/scripts",
+    "lint": "eslint themes/app/src",
+    "lint:fix": "eslint --fix themes/app/src",
     "analyze": "NODE_ENV=production ANALYZE=1 webpack"
   },
   "babel": {
@@ -20,12 +20,6 @@
           "useBuiltIns": "usage",
           "corejs": "core-js@3"
         }
-      ],
-      [
-        "@babel/preset-react",
-        {
-          "runtime": "automatic"
-        }
       ]
     ]
   },
@@ -35,40 +29,37 @@
     "not ie 11"
   ],
   "devDependencies": {
-    "@babel/core": "^7.22.9",
-    "@babel/preset-env": "^7.22.9",
-    "@babel/preset-react": "^7.22.5",
-    "autoprefixer": "^10.4.14",
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.22.20",
+    "autoprefixer": "^10.4.16",
     "babel-loader": "^9.1.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
-    "core-js": "^3.31.1",
+    "core-js": "^3.33.0",
     "css-loader": "^6.8.1",
     "css-minimizer-webpack-plugin": "^5.0.1",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-react": "^7.33.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
     "mini-css-extract-plugin": "^2.7.6",
-    "postcss": "^8.4.27",
+    "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "postcss-loader": "^7.3.3",
     "postcss-pxtorem": "^6.0.0",
-    "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.4.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.5",
     "style-loader": "^3.3.3",
     "svg-spritemap-webpack-plugin": "^4.5.0",
     "webpack": "^5.88.2",
     "webpack-assets-manifest": "^5.1.0",
-    "webpack-bundle-analyzer": "^4.9.0",
+    "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.9.0",
-    "webpack-remove-empty-scripts": "^1.0.3"
+    "webpack-remove-empty-scripts": "^1.0.4"
   },
   "dependencies": {
     "delegated-events": "^1.1.2",
     "tailwindcss": "^3.3.3",
-    "wretch": "^2.6.0"
+    "wretch": "^2.7.0"
   }
 }

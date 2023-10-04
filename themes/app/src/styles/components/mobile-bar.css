@@ -1,0 +1,7 @@
+.mobile-bar {
+  @apply fixed bottom-0 left-0 z-20 flex min-h-[75px] w-full items-center justify-around px-4 py-2 text-center text-xs transition-transform duration-500 md:hidden;
+
+  &.is-hidden {
+    @apply translate-y-full transform-gpu;
+  }
+}
