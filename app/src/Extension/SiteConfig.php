@@ -2,6 +2,7 @@
 
 namespace App\Extension;
 
+use App\Model\CallToAction;
 use App\Model\MobileBarAction;
 use App\Model\NavigationMenu;
 use App\Model\SiteIcon;
@@ -47,7 +48,8 @@ class SiteConfig extends DataExtension
 
     private static $has_many = [
         'MobileBarActions' => MobileBarAction::class . '.Owner',
-        'ThirdPartyScripts' => ThirdPartyScript::class . '.Owner'
+        'ThirdPartyScripts' => ThirdPartyScript::class . '.Owner',
+        'CallToActions' => CallToAction::class . '.Owner'
     ];
 
     private static $owns = [
@@ -183,6 +185,22 @@ class SiteConfig extends DataExtension
         $link = sprintf('https://www.google.com/maps/place/%s', join('+', $address));
 
         return str_replace(' ', '+', $link);
+    }
+
+    public function HasCTAs($key = null)
+    {
+        return $this->owner->CTAs($key)->count();
+    }
+
+    public function CTAs($key = null)
+    {
+        $ctas = $this->owner->CallToActions();
+
+        if ($key) {
+            $ctas = $ctas->filter('ActionSectionIdentifier', $key);
+        }
+
+        return $ctas;
     }
 
     public function getSiteStructuredData()
