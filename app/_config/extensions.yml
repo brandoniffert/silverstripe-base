@@ -36,6 +36,7 @@ SilverStripe\CMS\Model\SiteTree:
     - App\Extension\SiteTree
 
 SilverStripe\Control\Controller:
+  add_trailing_slash: true
   extensions:
     - App\Extension\Controller
 

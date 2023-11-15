@@ -1,20 +1,12 @@
 ---
-Name: project-emailconfig
-After:
-  - '#emailconfig'
+Name: appmailer
+After: "mailer"
 ---
 SilverStripe\Core\Injector\Injector:
-  Swift_Transport:
-    class: Swift_SmtpTransport
-    properties:
-      Host: '`MAIL_HOST`'
-      Port: '`MAIL_PORT`'
-      Encryption: '`MAIL_ENCRYPTION`'
-    calls:
-      Username: [setUsername, ['`MAIL_USER`']]
-      Password: [setPassword, ['`MAIL_PASS`']]
-      AuthMode: [setAuthMode, ['`login`']]
+  Symfony\Component\Mailer\Transport\TransportInterface:
+    constructor:
+      dsn: "`MAILER_DSN`"
 
 SilverStripe\Control\Email\Email:
   admin_email:
-    'info@example.com': 'Site Name'
+    "info@example.com": "App"

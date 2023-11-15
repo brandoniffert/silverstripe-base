@@ -3,23 +3,22 @@
     "type": "silverstripe-recipe",
     "description": "A base SilverStripe setup",
     "require": {
-        "php": "^8.0 || ^8.1",
-        "silverstripe/recipe-plugin": "^1.2",
-        "silverstripe/recipe-cms": "~4.13.0@stable",
-        "silverstripe/login-forms": "~4.8.0@stable",
-        "cakephp/chronos": "^2.3",
-        "dnadesign/silverstripe-elemental": "^4",
-        "firebrandhq/silverstripe-phonelink": "^2.1",
-        "jonom/focuspoint": "^4.0",
-        "kinglozzer/metatitle": "^2.0",
-        "ryanpotter/silverstripe-cms-theme": "3.4.4",
-        "silverstripe/redirectedurls": "^2.1",
-        "silverware/calendar": "^1.1",
-        "symbiote/silverstripe-gridfieldextensions": "^3.6",
-        "unclecheese/display-logic": "^2.0",
-        "wilr/silverstripe-googlesitemaps": "^2.2",
-        "axllent/silverstripe-trailing-slash": "^2.2",
-        "wedevelopnl/silverstripe-webp-images": "^1.0"
+        "php": "^8.1",
+        "silverstripe/recipe-plugin": "~2.0.0@stable",
+        "silverstripe/vendor-plugin": "~2.0.1@stable",
+        "silverstripe/recipe-cms": "~5.1.0@stable",
+        "silverstripe/login-forms": "~5.1.0@stable",
+        "cakephp/chronos": "^2.4",
+        "ryanpotter/silverstripe-cms-theme": "dev-master",
+        "dnadesign/silverstripe-elemental": "^5.0",
+        "firebrandhq/silverstripe-phonelink": "^3.0",
+        "jonom/focuspoint": "^5.0",
+        "kinglozzer/metatitle": "^3.0",
+        "silverstripe/redirectedurls": "^3.0",
+        "symbiote/silverstripe-gridfieldextensions": "^4.0",
+        "unclecheese/display-logic": "^3.0",
+        "wilr/silverstripe-googlesitemaps": "^3.0",
+        "wedevelopnl/silverstripe-webp-images": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
@@ -34,16 +33,6 @@
         ]
     },
     "extra": {
-        "project-files": [
-            "app/_config/*",
-            ".env.example",
-            ".graphql-generated/*"
-        ],
-        "public-files": [
-            "assets/*",
-            "favicon.ico"
-        ],
-        "resources-dir": "_resources",
         "project-files-installed": [
             "app/.htaccess",
             "app/_config.php",

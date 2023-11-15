@@ -106,12 +106,17 @@ const WebpackConfig = {
   },
 
   optimization: {
-    runtimeChunk: "single",
+    runtimeChunk: 'single',
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
-        defaultVendors: {
-          name: "vendor",
-          chunks: "all",
+        polyfills: {
+          test: /[\\/]node_modules[\\/](@babel|core-js|regenerator-runtime)[\\/]/,
+          name: 'polyfills',
+          chunks: 'initial',
+          priority: 60,
+          enforce: true,
+          reuseExistingChunk: true,
         },
       },
     },

@@ -16,7 +16,6 @@ use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\ArrayList;
@@ -136,15 +135,10 @@ class SiteConfig extends DataExtension
             )
         ]);
 
-        $fields->addFieldsToTab(
-            'Root.Canonical',
-            LiteralField::create(
-                'Info',
-                '<p>The canonical domain will be added to the HTML head of your pages. It should be specified with the full protocol and with no trailing slash, eg. https://www.example.com</p>'
-            ),
+        $fields->addFieldsToTab('Root.Canonical', [
             TextField::create('CanonicalDomain')
-                ->setDescription('eg. https://www.example.com')
-        );
+                ->setDescription('The canonical domain will be added to the HTML head of your pages. It should be specified with the full protocol and with no trailing slash, eg. https://www.example.com')
+        ]);
     }
 
     public function getSocialMediaList()
