@@ -190,6 +190,23 @@ table.grid-field__table + .description {
   display: none;
 }
 
+.hide-field {
+  display: none !important;
+}
+
+.visually-hide-field {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+  opacity: 0;
+}
+
 /* Hide disabled page types from Add Page */
 #Form_AddForm_PageType_Holder .radio.form-check.disabled {
   display: none;
