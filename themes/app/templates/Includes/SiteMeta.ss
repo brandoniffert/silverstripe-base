@@ -43,7 +43,11 @@ $MetaTags(false)
   <% end_if %>
 <% end_if %>
 
-<meta property="og:url" content="$AbsoluteLink" />
+<% if CanonicalLink %>
+  <meta property="og:url" content="$CanonicalLink" />
+<% else %>
+  <meta property="og:url" content="$AbsoluteLink" />
+<% end_if %>
 
 <% if SiteConfig.SocialSharePhoto.Exists && not ObjectMetaTags.MetaImage %>
   <meta property="og:image" content="$SiteConfig.SocialSharePhoto.AbsoluteURL">
